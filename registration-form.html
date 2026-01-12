@@ -3,9 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Join AHC Robotics - Registration Form</title>
+    <link rel="stylesheet" href="form.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logo.png" alt="Deep Sea Dogs Logo" class="logo-img">
+                <div>
+                    <h1>Deep Sea Dogs</h1>
+                    <p class="subtitle">Allan Hancock College Robotics</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="form-container">
+            <div id="successMessage" class="success-message">
+                Thank you for joining! We'll contact you soon with more information.
+            </div>
+            
+            <h2 class="form-title">Club Registration Form</h2>
+            <p class="form-description">
+                Join the Deep Sea Dogs and dive into the exciting world of underwater robotics!
+            </p>
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="firstName">First Name <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">Last Name <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="student@my.hancockcollege.edu" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number (Optional)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(805) 123-4567">
+                </div>
+                
+                <fieldset class="checkbox-group">
+                    <legend>How did you hear about us? <span class="required">*</span></legend>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="friend" name="source" value="friend">
+                        <label for="friend">Friend or Classmate</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="event" name="source" value="event">
+                        <label for="event">School Event or Fair</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="flyer" name="source" value="flyer">
+                        <label for="flyer">Flyer or Poster</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="website" name="source" value="website">
+                        <label for="website">School Website</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="social" name="source" value="social">
+                        <label for="social">Social Media</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="other" name="source" value="other">
+                        <label for="other">Other</label>
+                    </div>
+                </fieldset>
+                
+                <div class="form-group">
+                    <label for="experience">Previous Robotics Experience (Optional)</label>
+                    <textarea id="experience" name="experience" placeholder="Tell us about any previous robotics or programming experience you have..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interests">What interests you most about robotics? (Optional)</label>
+                    <textarea id="interests" name="interests" placeholder="Underwater exploration, programming, mechanical design, competitions..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">Join the Deep Sea Dogs!</button>
+            </form>
+            
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </div>
     
+    <script>
+        const form = document.getElementById('registrationForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Check if at least one checkbox is selected
+            const checkboxes = document.querySelectorAll('input[name="source"]');
+            const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            
+            if (!isChecked) {
+                alert('Please select at least one option for how you heard about us.');
+                return;
+            }
+            
+            // Show success message
+            successMessage.classList.add('show');
+            
+            // Scroll to top to see message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Reset form after a delay
+            setTimeout(() => {
+                form.reset();
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 3000);
+            }, 1000);
+            
+            // In a real application, you would send this data to a server
+            // For example:
+            // const formData = new FormData(form);
+            // fetch('submit-registration.php', { method: 'POST', body: formData });
+        });
+    </script>
 </body>
 </html>
